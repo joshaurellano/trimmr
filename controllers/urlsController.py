@@ -2,16 +2,19 @@ from fastapi import HTTPException
 from fastapi.responses import RedirectResponse
 from secrets import token_urlsafe
 import validators
+import os
 
 from config.database import supabase
 from models.models import Url
+
+BASE_URL = os.getenv("BASE_URL")
 
 async def short_url(url: Url):
     if not validators.url(url.url):
         raise HTTPException(status_code=400, detail="Invalid URL")
 
     url_id = token_urlsafe(5)
-    shorted_url = f'http://127.0.0.1:8000/{url_id}'
+    shorted_url = f'{BASE_URL}{url_id}'
 
     supabase.table('urls').insert({
         'url_id': url_id,
