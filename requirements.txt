@@ -1,0 +1,5 @@
+fastapi[standard]
+validators
+qrcode[pil]
+supabase
+python-dotenv
