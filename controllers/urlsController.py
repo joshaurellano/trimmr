@@ -6,7 +6,7 @@ import validators
 from config.database import supabase
 from models.models import Url
 
-def short_url(url: Url):
+async def short_url(url: Url):
     if not validators.url(url.url):
         raise HTTPException(status_code=400, detail="Invalid URL")
 
@@ -23,7 +23,7 @@ def short_url(url: Url):
         'msg': 'done', 
         'url': shorted_url}
 
-def get_target_url(_id: str):
+async def get_target_url(_id: str):
     result = supabase.table('urls').select('target_url').eq('url_id', _id).execute()
 
     if result.data:

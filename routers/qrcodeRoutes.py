@@ -3,7 +3,7 @@ from models.models import Url
 
 from controllers.qrcodeController import generate_qr_code
 
-router = APIRouter(prefix="/qrcode", tags=["QR Code"])
+router = APIRouter()
 
 @router.post("/generate")
 async def generate_qr_code_route(url: Url):

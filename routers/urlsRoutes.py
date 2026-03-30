@@ -4,7 +4,7 @@ from config.database import supabase
 
 from controllers.urlsController import short_url, get_target_url
 
-router = APIRouter(prefix="/urls", tags=["URLs"])
+router = APIRouter()
 
 @router.post("/short")
 async def short_url_route(url: Url):
