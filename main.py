@@ -15,9 +15,8 @@ import json
 import validators
 
 app = FastAPI()
-load_dotenv()
 
-database = json.load(open('database.json', 'r'))
+load_dotenv()
 
 SUPABASE_URL = os.environ.get("SUPABASE_URL")
 SUPABASE_KEY = os.environ.get("SUPABASE_KEY")
@@ -37,7 +36,7 @@ class Url(BaseModel):
 
 @app.get('/')
 def home():
-    return {'msg': 'Welcome in My API :)'}
+    return {'msg': 'Root'}
 
 @app.post("/generate")
 async def generate_qr_code(url: Url):
