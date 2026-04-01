@@ -4,9 +4,14 @@ import qrcode
 import io
 
 from models.models import Url
+from utils.validator import urlValidator
 
 async def generate_qr_code(url:Url):
+    validator = await urlValidator(url.url)
 
+    if not validator:
+        raise HTTPException(status_code=400, detail="Invalid URL")
+    
     try:
         img = qrcode.make(url.url)
         output_buffer = io.BytesIO()

@@ -6,11 +6,14 @@ import os
 
 from config.database import supabase
 from models.models import Url
+from utils.validator import urlValidator
 
 BASE_URL = os.getenv("BASE_URL")
 
 async def short_url(url: Url):
-    if not validators.url(url.url):
+    validator = await urlValidator(url.url)
+
+    if not validator:
         raise HTTPException(status_code=400, detail="Invalid URL")
 
     url_id = token_urlsafe(5)
